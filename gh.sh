@@ -59,10 +59,10 @@ gh_insert() {
         val="${!i2}"
         if grep -q "^export $prop=" "$gh_rcFile"; then
             sed -i "s/^export $prop=.*$/export $prop=$val/" "$gh_rcFile" &&
-            echo "[updated] $prop=$val"
+            echo "[updated] export $prop=$val"
         else
             echo -e "export $prop=$val" >> "$gh_rcFile"
-            echo "[inserted] $prop=$val"
+            echo "[inserted] export $prop=$val"
         fi
     done
 }
