@@ -129,7 +129,7 @@ gh_main() {
         args="${args% --*}"
     else
         # default to .bashrc file
-        gh_file ".bashrc"
+        gh_file "~/.bashrc"
     fi
 
     [[ "$method" = "insert" ]] && gh_insert $args;
