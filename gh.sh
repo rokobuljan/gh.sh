@@ -79,9 +79,9 @@ gh_delete() {
     for prop in "$@"; do
         if grep -q "^export $prop=" "$gh_rcFile"; then
             sed -i "/^export $prop=.*$/d" "$gh_rcFile" &&
-            echo "[deleted] $prop"
+            echo "[deleted] export $prop"
         else
-            echo "[not found] $prop"
+            echo "[not found] export $prop"
         fi
     done
 }
