@@ -91,17 +91,30 @@ To use gh's functions in another file — source `gh.sh` into an existing shell 
 # Import greenhouse functions
 source "./gh.sh"  # or use absolute path
 
-gh_insert "SOME_PROP" "some_value" SOME_OTHER_PROP other_value
+# Switch to another file (if needed)
+gh_file "~/.profile"
+
+gh_insert "SOME_PROP" "some_value" SOME_OTHER_PROP other_value PORT 8080
+#> [inserted] export SOME_PROP=some_value
+#> [inserted] export SOME_OTHER_PROP=other_value
+#> [inserted] export PORT=8080
+
+# Quote as needed:
+gh_insert NVM_DIRR \"\$HOME/.nvm\" 
+#> [inserted] export NVM_DIRR="$HOME/.nvm"
 
 gh_delete "SOME_OTHER_PROP"
+#> [deleted] export SOME_OTHER_PROP
 
-# Switch to another file
-gh_file "~/.profile"  
+# To mute notifications use 1>/dev/null like:
+gh_delete "SOME_PROP" 1>/dev/null
 
-gh_search "PORT"  # 8080
+gh_search "PORT"
+#> export PORT=8080
 
 # Check the currently operated file path
-echo $gh_rcFile  # ~/.profile
+echo $gh_rcFile 
+#> ~/.profile
 
 # ...
 ```
