@@ -36,8 +36,7 @@ Notice:
 gh_file() {
     # Make sure the rc file exists
     if ! [[ -f "$1" ]]; then
-        echo "[error] File \"$1\" does not exist"
-        gh_usage
+        echo "[error] File \"$1\" does not exist" >&2
         exit 1
     fi
     gh_rcFile=$1
@@ -45,7 +44,7 @@ gh_file() {
 
 gh_insert() {
     if (( $# % 2 != 0 )); then
-        echo "[error] Invalid number of arguments. At least two arguments needed"
+        echo "[error] Invalid number of arguments. At least two arguments needed" >&2
         gh_usage
         return 1
     fi
@@ -69,7 +68,7 @@ gh_insert() {
 
 gh_delete() {
     if (( $# < 1 )); then
-        echo "[error] Invalid number of arguments. At least one property name to delete is needed"
+        echo "[error] Invalid number of arguments. At least one property name to delete is needed" >&2
         gh_usage
         return 1
     fi
@@ -88,7 +87,7 @@ gh_delete() {
 
 gh_search() {
     if (( $# < 1 )); then
-        echo "[error] Invalid number of arguments. At least one property name to search is needed"
+        echo "[error] Invalid number of arguments. At least one property name to search is needed" >&2
         gh_usage
         return 1
     fi
@@ -96,20 +95,22 @@ gh_search() {
     local prop=""
 
     for prop in "$@"; do
-        grep "^export ${prop}=" "$gh_rcFile" || echo "[not found] $prop"
+        grep "^export ${prop}=" "$gh_rcFile" ||
+        echo -n ""
     done
 }
 
 gh_main() {
 
     if [[ "$#" -lt 2 ]]; then
-        gh_usage && exit 0
+        gh_usage
+        exit 0
     fi
 
     local method=$1
 
     if ! [[ "$method" =~ ^(insert|delete|search|file)$ ]]; then
-        echo "[error] Invalid method $method"
+        echo "[error] Invalid method $method" >&2
         gh_usage
         exit 1
     fi
@@ -122,7 +123,7 @@ gh_main() {
     local argLast="${*: -1:1}"
     local argSubLast="${*: -2:1}"
 
-    if [[ "$argSubLast" = "--" ]] && [[ -n "$argLast" ]]; then
+    if [[ "$argSubLast" == "--" ]] && [[ -n "$argLast" ]]; then
         # Set custom file
         gh_file "$argLast"
         # remove file related args
