@@ -91,14 +91,14 @@ To use gh's functions in another file — source `gh.sh` into an existing shell 
 # Import greenhouse functions
 source "./gh.sh"  # or use absolute path
 
-gh_insert \"SOME_PROP\" \"some_value\" SOME_OTHER_PROP other_value
+gh_insert "SOME_PROP" "some_value" SOME_OTHER_PROP other_value
 
-gh_delete \"SOME_OTHER_PROP\"
+gh_delete "SOME_OTHER_PROP"
 
 # Switch to another file
 gh_file "~/.profile"  
 
-gh_search \"PORT\"  # 8080
+gh_search "PORT"  # 8080
 
 # Check the currently operated file path
 echo $gh_rcFile  # ~/.profile
