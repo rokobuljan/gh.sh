@@ -33,12 +33,8 @@ bash ./gh.sh insert SOME_PROP some_value OTHER_PROP other_value -- "~/.profile"
 **Returns**
 
 ```sh
-[inserted] SOME_PROP=some_value
-```
-or for multiple:
-```sh
-[modified] SOME_PROP=some_value
-[inserted] OTHER_PROP=other_value
+[modified] export SOME_PROP=some_value
+[inserted] export OTHER_PROP=other_value
 ```
 
 ### Delete
@@ -55,6 +51,11 @@ bash ./gh.sh delete SOME_PROP OTHER_PROP -- "~/.bash_profile"
 ```
 
 **Returns**
+
+```sh
+[deleted] export SOME_PROP
+[not found] export SOME_PROP
+```
 
 ### Search
 
@@ -84,22 +85,25 @@ To use gh's functions in another file — source `gh.sh` into an existing shell 
 *N.b:* Functions and global variables are *namespaced* with the `gh_` prefix.)
 
 <sub>app.sh</sub>
-```
+
+```sh
 #!/bin/bash
 # ...
 
+# Import greenhouse functions
 source "./gh.sh"  # or use absolute path
 
-gh_insert \"SOME_PROP\" \"some_value\"
 gh_insert \"SOME_PROP\" \"some_value\" SOME_OTHER_PROP other_value
 
 gh_delete \"SOME_OTHER_PROP\"
 
-gh_file .profile    # Switch to another file
+# Switch to another file
+gh_file "~/.profile"  
 
 gh_search \"PORT\"  # 8080
 
-echo \$gh_rcFile    # Check current file path
+# Check the currently operated file path
+echo $gh_rcFile  # ~/.profile
 
 # ...
 ```
@@ -107,5 +111,3 @@ echo \$gh_rcFile    # Check current file path
 ## Licence
 
 MIT
-
-Disclaimer: Always test before using.
