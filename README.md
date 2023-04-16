@@ -30,7 +30,7 @@ bash ./gh.sh insert SOME_PROP some_value OTHER_PROP other_value
 bash ./gh.sh insert SOME_PROP some_value OTHER_PROP other_value -- "~/.profile"
 ```
 
-**Returns**
+Returns example:
 
 ```sh
 [modified] export SOME_PROP=some_value
@@ -50,7 +50,7 @@ bash ./gh.sh delete SOME_PROP OTHER_PROP  # ...
 bash ./gh.sh delete SOME_PROP OTHER_PROP -- "~/.bash_profile"
 ```
 
-**Returns**
+Returns example:
 
 ```sh
 [deleted] export SOME_PROP
@@ -69,11 +69,9 @@ bash ./gh.sh search SOME_PROP
 # Search multiple in specific file
 bash ./gh.sh insert SOME_PROP OTHER_PROP -- "~/.profile"
 ```
-Returns
 
-```sh
-export SOME_PROP=some_value
-```
+Returns example:
+
 ```sh
 export SOME_PROP=some_value
 export OTHER_PROP=other_value
