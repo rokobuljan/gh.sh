@@ -13,16 +13,18 @@ gh_usage() {
     echo -e "gh $gh_version
 Usage:
     -v      # Verbose insert and delete
-    insert [[PROPERTY value] ...]
-    delete [PROPERTY ...]
-    search [PROPERTY ...]
-    [-- file]
+    [       # Method (one of):
+        insert [PROPERTY value] ...
+        delete PROPERTY ...
+        search PROPERTY ...
+    ]
+    -- file? # Optional (defaults to \$HOME/.bashrc)
 Examples:
     bash ./gh.sh insert SOME_PROP someValue
     bash ./gh.sh -v insert SOME_PROP someValue OTHER_PROP otherValue  # [inserted|updated]
     bash ./gh.sh -v delete SOME_PROP  # [deleted|not found]
     bash ./gh.sh search SOME_PROP | awk -F '=' '{print \$2}'  # value
-    bash ./gh.sh search SOME_PROP -- .profiles  # [export SOME_PROP=value | ""]
+    bash ./gh.sh search SOME_PROP -- ~/.profiles  # [export SOME_PROP=value | ""]
 Using source and gh functions:
     source ./gh.sh
     gh_insert \"SOME_PROP\" \"some_value\"
