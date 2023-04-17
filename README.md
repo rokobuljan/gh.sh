@@ -33,7 +33,7 @@ bash ./gh.sh insert SOME_PROP some_value OTHER_PROP other_value -- "~/.profile"
 bash ./gh.sh -v insert SOME_PROP some_value OTHER_PROP other_value -- "~/.profile"
 ```
 
-If `-v` (verbose) flag is used those are someresult examples:
+Return examples with `-v` (verbose) flag:
 
 ```sh
 [modified] export SOME_PROP=some_value
@@ -56,7 +56,7 @@ bash ./gh.sh delete SOME_PROP OTHER_PROP -- "~/.bash_profile"
 bash ./gh.sh -v delete SOME_PROP OTHER_PROP -- "~/.bash_profile"
 ```
 
-Returns examples with `-v` (verbose) flag:
+Return examples with `-v` (verbose) flag:
 
 ```sh
 [deleted] export SOME_PROP
@@ -76,7 +76,7 @@ bash ./gh.sh search SOME_PROP
 bash ./gh.sh insert SOME_PROP OTHER_PROP -- "~/.profile"
 ```
 
-Returns example:
+Return examples:
 
 ```sh
 export SOME_PROP=some_value
@@ -135,6 +135,14 @@ echo $gh_rcFile
 #> ~/.profile
 
 # ...
+```
+
+### Error messages  
+
+When an error is encountered, even in silent mode (non `-v` verbose), you can expect this error messages format:
+
+```sh
+[error] Some caught error message
 ```
 
 ## Licence
