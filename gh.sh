@@ -14,9 +14,9 @@ gh_usage() {
 Usage:
     -v      # Verbose insert and delete
     [       # Method (one of):
-        insert [PROPERTY value] ...
-        delete PROPERTY ...
-        search PROPERTY ...
+        insert [PROPERTY value, ]
+        delete [PROPERTY, ]
+        search [PROPERTY, ]
     ]
     -- file? # Optional (defaults to \$HOME/.bashrc)
 Examples:
