@@ -3,7 +3,7 @@
 # gh
 #
 # A greenhouse utility for managing your environment (exports)
-# Inserts, modify and delete ~/.bashrc (or another file's) exports like:
+# Insert, modify and delete ~/.bashrc (or another file's) exports like:
 # export PROPERTY=value
 
 gh_version="v1.1.0"
