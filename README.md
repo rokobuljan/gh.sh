@@ -1,6 +1,6 @@
 # gh.sh
 Greenhouse.  
-Env variables exports manager
+Environment variables exports manager
 
 Insert, modify, delete your `~/.bashrc` (or any other file's) environment variables exports like i.e:
 
@@ -28,9 +28,12 @@ bash ./gh.sh insert SOME_PROP some_value OTHER_PROP other_value
 
 # Insert/update multiple in specific file
 bash ./gh.sh insert SOME_PROP some_value OTHER_PROP other_value -- "~/.profile"
+
+# Insert/update multiple in specific file - Verbose
+bash ./gh.sh -v insert SOME_PROP some_value OTHER_PROP other_value -- "~/.profile"
 ```
 
-Returns example:
+If `-v` (verbose) flag is used those are someresult examples:
 
 ```sh
 [modified] export SOME_PROP=some_value
@@ -48,9 +51,12 @@ bash ./gh.sh delete SOME_PROP OTHER_PROP  # ...
 
 # Delete multiple in specific file
 bash ./gh.sh delete SOME_PROP OTHER_PROP -- "~/.bash_profile"
+
+# Delete multiple in specific file - Verbose
+bash ./gh.sh -v delete SOME_PROP OTHER_PROP -- "~/.bash_profile"
 ```
 
-Returns example:
+Returns examples with `-v` (verbose) flag:
 
 ```sh
 [deleted] export SOME_PROP
@@ -75,6 +81,7 @@ Returns example:
 ```sh
 export SOME_PROP=some_value
 export OTHER_PROP=other_value
+""    # (empty string if not found)
 ```
 
 ## Source
@@ -91,26 +98,37 @@ To use gh's functions in another file — source `gh.sh` into an existing shell 
 # Import greenhouse functions
 source "./gh.sh"  # or use absolute path
 
-# Switch to another file (if needed)
-gh_file "~/.profile"
+# When needed, switch to another file:
+gh_file ~/.profile
+# PS: Don't use "quotes" if you use the ~ tilda $HOME alias
 
-gh_insert "SOME_PROP" "some_value" SOME_OTHER_PROP other_value PORT 8080
-#> [inserted] export SOME_PROP=some_value
-#> [inserted] export SOME_OTHER_PROP=other_value
+myVar="test"
+
+# Insert, update (silent):
+gh_insert SOME_PROP "$myVar"
+
+# Verbose insert, update:
+gh_insertv SOME_PROP "$myVar" OTHER_PROP other_value PORT 8080
+#> [modified] export SOME_PROP=test
+#> [inserted] export OTHER_PROP=other_value
 #> [inserted] export PORT=8080
 
-# Quote as needed:
-gh_insert NVM_DIRR \"\$HOME/.nvm\" 
-#> [inserted] export NVM_DIRR="$HOME/.nvm"
+# Quote literally and escape as needed:
+gh_insertv OTHER_PROP "\"\$HOME\/.nvm\""
+#> [modified] export OTHER_PROP="$HOME/.nvm"
 
-gh_delete "SOME_OTHER_PROP"
-#> [deleted] export SOME_OTHER_PROP
+# Delete (silent)
+gh_delete "SOME_PROP"
 
-# To mute notifications use 1>/dev/null like:
-gh_delete "SOME_PROP" 1>/dev/null
+# Verbose delete
+gh_deletev "OTHER_PROP"
+#> [deleted] export OTHER_PROP
 
 gh_search "PORT"
 #> export PORT=8080
+
+gh_search "NONEXISTENT"
+#>
 
 # Check the currently operated file path
 echo $gh_rcFile 
