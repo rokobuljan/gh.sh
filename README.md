@@ -73,7 +73,7 @@ bash ./gh.sh search SOME_PROP
 bash ./gh.sh search SOME_PROP 
 
 # Search multiple in specific file
-bash ./gh.sh insert SOME_PROP OTHER_PROP -- "~/.profile"
+bash ./gh.sh search SOME_PROP OTHER_PROP -- "~/.profile"
 ```
 
 Return examples:
